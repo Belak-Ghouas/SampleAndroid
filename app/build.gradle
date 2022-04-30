@@ -7,11 +7,11 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.belak.sample"
-        minSdk minSdkVersion
-        targetSdk targetSdkVersion
-        versionCode versionCode
-        versionName versionName
+        applicationId = "com.belak.sample"
+        minSdk = rootProject.ext.minSdkVersion
+        targetSdk = targetSdkVersion
+        versionCode = 1
+        versionName = versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -1,9 +1,12 @@
-package com.belak.sample.view.activities
+package com.belak.sample.view.fragments
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.belak.sample.view.viewmodels.BaseActivityViewModel
+import com.belak.sample.view.viewmodels.BaseFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,7 +18,7 @@ import java.lang.reflect.ParameterizedType
 import kotlin.reflect.KClass
 
 
-abstract class BaseActivity <VM : BaseActivityViewModel, B : ViewBinding> : AppCompatActivity() {
+abstract class BaseFragment <VM : BaseFragmentViewModel, B : ViewBinding> : Fragment() {
 
     private val job = Job()
     protected val coroutineScope = CoroutineScope(Dispatchers.Main + job)
@@ -24,15 +27,21 @@ abstract class BaseActivity <VM : BaseActivityViewModel, B : ViewBinding> : AppC
     abstract val moduleList : List<Module>
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = getViewBinding()
-        setContentView(binding.root)
         loadKoinModules(moduleList)
         activityViewModel = getViewModel(clazz = getViewModelClass())
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = getViewBinding()
         initViews()
         initObservers()
+       return binding.root
     }
 
     abstract fun getViewBinding(): B
@@ -40,6 +49,11 @@ abstract class BaseActivity <VM : BaseActivityViewModel, B : ViewBinding> : AppC
     abstract fun initObservers()
 
 
+    /**
+     * using reflection to find the class of ViewModel
+     * and like that we can instantiate it on the baseFragment
+     * we don't have to add any code in the child fragments
+     */
     private fun getViewModelClass(): KClass<VM> {
         return (((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]) as Class<VM>).kotlin
     }
