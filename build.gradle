@@ -19,19 +19,19 @@ ext {
     targetSdkVersion = 31
     buildToolsVersion = "32.0.0"
     kotlin_version = '1.6.21'
-    core_ktx = "1.7.0"
-    app_compat = "1.4.1"
+    core_ktx = "1.8.0"
+    app_compat = "1.4.2"
     koin_version = '2.2.2'
-    constraintlayout_version = '2.1.3'
     coroutines_version = "1.3.9"
 
-    koin_version = '2.2.2'
+    koin_version = '3.1.2'
 
     androidxtest_version = '1.4.0'
     androidxtestext_version = '1.1.3'
     androidcorektx_version = '1.6.0'
     androidxappcompat_version = '1.3.1'
-    androidmaterial_version = '1.5.0'
+    androidmaterial_version = '1.6.1'
+    gsonVersion = '2.9.0'
 
     junit_version = '4.13.2'
     junitjupiter_version = '5.8.2'
@@ -49,8 +49,8 @@ ext {
 
     viewModelCoroutineScope='2.2.0'
     viewCoroutineScope='2.2.0'
-    constraintLayout ='2.1.3'
+    constraintLayout ='2.1.4'
     fragment_ktx = '1.3.2'
     activity_ktx ='1.2.0'
-    coroutinesTest = "1.3.9"
+    coroutinesTest = "1.6.1"
 }
